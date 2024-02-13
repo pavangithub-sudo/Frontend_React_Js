@@ -6,12 +6,12 @@ export default function AddUser() {
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
-    name: "",
-    username: "",
-    email: "",
+    id: "",
+    accountName: "",
+    balance: "",
   });
 
-  const { name, username, email } = user;
+  const { id, accountName, balance } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -19,7 +19,7 @@ export default function AddUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/user", user);
+    await axios.post("http://localhost:8080/bank/createAccount", user);
     navigate("/");
   };
 
@@ -27,45 +27,32 @@ export default function AddUser() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Register User</h2>
+          <h2 className="text-center m-4">Register Account</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="Name" className="form-label">
-                Name
+              <label htmlFor="accountName" className="form-label">
+              Account Name
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your name"
-                name="name"
-                value={name}
+                placeholder="Enter your accountName"
+                name="accountName"
+                value={accountName}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Username" className="form-label">
-                Username
+              <label htmlFor="balance" className="form-label">
+                Balance
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your username"
-                name="username"
-                value={username}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="Email" className="form-label">
-                E-mail
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter your e-mail address"
-                name="email"
-                value={email}
+                placeholder="Enter balance"
+                name="balance"
+                value={balance}
                 onChange={(e) => onInputChange(e)}
               />
             </div>

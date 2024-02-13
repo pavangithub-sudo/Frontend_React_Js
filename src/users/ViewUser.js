@@ -4,9 +4,11 @@ import { Link, useParams } from "react-router-dom";
 
 export default function ViewUser() {
   const [user, setUser] = useState({
-    name: "",
-    username: "",
+    id: "",
+    accountName: "",
+    balance: "",
     email: "",
+    password: ""
   });
 
   const { id } = useParams();
@@ -16,7 +18,7 @@ export default function ViewUser() {
   }, []);
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
+    const result = await axios.get(`http://localhost:8080/bank/getAccount/${id}`);
     setUser(result.data);
   };
 
@@ -24,23 +26,31 @@ export default function ViewUser() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">User Details</h2>
+          <h2 className="text-center m-4">User Account Details</h2>
 
           <div className="card">
             <div className="card-header">
-              Details of user id : {user.id}
+              Details of Account id : {user.id}
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <b>Name:</b>
-                  {user.name}
+                  <b>ID: </b>
+                  {user.id}
                 </li>
                 <li className="list-group-item">
-                  <b>UserName:</b>
-                  {user.username}
+                  <b>Account Name: </b>
+                  {user.accountName}
                 </li>
                 <li className="list-group-item">
-                  <b>Email:</b>
+                  <b>Balance: </b>
+                  {user.balance}
+                </li>
+                <li className="list-group-item">
+                  <b>Email: </b>
                   {user.email}
+                </li>
+                <li className="list-group-item">
+                  <b>Password: </b>
+                  {user.password}
                 </li>
               </ul>
             </div>
